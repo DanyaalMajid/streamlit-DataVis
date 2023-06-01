@@ -3,8 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Function to render a line plot
-
-
 def render_line_plot(data, x_col, y_cols):
     plt.figure(figsize=(10, 6))
     for col in y_cols:
@@ -16,8 +14,6 @@ def render_line_plot(data, x_col, y_cols):
     st.pyplot()
 
 # Function to render a bar plot
-
-
 def render_bar_plot(data, x_col, y_cols):
     plt.figure(figsize=(10, 6))
     x = data[x_col]
@@ -32,8 +28,6 @@ def render_bar_plot(data, x_col, y_cols):
     st.pyplot()
 
 # Function to render a scatter plot
-
-
 def render_scatter_plot(data, x_col, y_cols):
     plt.figure(figsize=(10, 6))
     for col in y_cols:
@@ -45,8 +39,6 @@ def render_scatter_plot(data, x_col, y_cols):
     st.pyplot()
 
 # Main function
-
-
 def main():
     st.title("Dataset Visualization App")
 
@@ -62,25 +54,21 @@ def main():
 
         # Choose columns for visualization
         columns = data.columns.tolist()
-        selected_cols = st.multiselect(
-            "Select columns for visualization", columns)
+
+        x_col = st.selectbox("Select x-axis column", columns)
+        selected_cols = st.multiselect("Select y-axis columns", columns)
 
         if selected_cols:
-            plot_type = st.selectbox("Select plot type", [
-                                     "Line Plot", "Bar Plot", "Scatter Plot"])
+            plot_type = st.selectbox("Select plot type", ["Line Plot", "Bar Plot", "Scatter Plot"])
 
             if plot_type == "Line Plot":
-                x_col = st.selectbox("Select x-axis column", selected_cols)
                 render_line_plot(data, x_col, selected_cols)
 
             elif plot_type == "Bar Plot":
-                x_col = st.selectbox("Select x-axis column", selected_cols)
                 render_bar_plot(data, x_col, selected_cols)
 
             elif plot_type == "Scatter Plot":
-                x_col = st.selectbox("Select x-axis column", selected_cols)
                 render_scatter_plot(data, x_col, selected_cols)
-
 
 # Run the app
 if __name__ == "__main__":
